@@ -1,0 +1,4 @@
+.form-check-input[type=checkbox]:checked + label.strikethrough {
+    margin-right: 0.8em;
+    text-decoration: line-through;
+}

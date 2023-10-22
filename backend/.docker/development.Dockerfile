@@ -1,0 +1,6 @@
+FROM openjdk:11-jdk-slim
+VOLUME /app
+WORKDIR /app
+ENV JWT_SECRET M1eEf7sxQqdtkcWDKcjDqfbLBFUQy3cFYvUZirmKRPduxrY0I4ogTSXdss5GIZJUtuQtXLQFiN5TK6Gk3dsWsCXl3Wkc797ve9xr6mHk6XL5BEvr9hBp6868iK2R31Ms
+EXPOSE 8080
+ENTRYPOINT ["./gradlew", "bootRun"]

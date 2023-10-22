@@ -1,0 +1,9 @@
+#>> Die Befehle unten werden beim ersten mal laufen automatisch ausgeführt!
+
+API_ENDPOINT=http://backend:8080
+PUBLIC_API_ENDPOINT=http://localhost:8080
+NEXTAUTH_URL=http://localhost:3000
+SECRET=`openssl rand -base64 64`
+JWT_SECRET=`openssl rand -base64 64`
+JWT_SIGNING_KEY=`npx node-jose-tools newkey -s 256 -t oct -a HS512`
+JWT_ENCRYPTION_KEY=`npx node-jose-tools newkey -s 256 -t oct -a A256GCM -u enc`

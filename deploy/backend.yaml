@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: backend
+  name: backend
+  namespace: level-uphaken
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+  selector:
+    service: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend
+  name: backend
+  namespace: level-uphaken
+spec:
+  selector:
+    matchLabels:
+      service: backend
+  template:
+    metadata:
+      labels:
+        service: backend
+    spec:
+      containers:
+        - image: git.haw-hamburg.de:5005/level-uphaken/level-uphaken/backend:latest
+          name: backend
+          env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: /api/v1
+          - name: MYSQL_URL
+            value: jdbc:mariadb://database:3306/level-uphaken
+          - name: MYSQL_USER
+            value: level-uphaken
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: backend-secrets
+                key: mysql-password
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: backend-secrets
+                key: jwt-secret
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: pull-secret

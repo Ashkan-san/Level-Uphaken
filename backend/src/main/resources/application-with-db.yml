@@ -1,0 +1,22 @@
+logging:
+  level:
+    org.springframework: warn
+    org.hibernate.type: warn
+---
+spring:
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${MYSQL_URL}
+    driverClassName: org.mariadb.jdbc.Driver
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+---
+server:
+  error:
+    include-stacktrace: never
+---
+application:
+  jwtSecret: ${JWT_SECRET}

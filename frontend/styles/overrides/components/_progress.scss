@@ -1,0 +1,9 @@
+.progress {
+    margin: auto;
+    .progress-bar {
+
+        &.progress-label:before {
+            margin: auto;
+        }
+    }
+}

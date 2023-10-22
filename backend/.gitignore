@@ -1,0 +1,27 @@
+# OS junk files.
+[Tt]humbs.db
+*.DS_Store
+
+# Java class files
+*.class
+
+# Eclipse course files
+.classpath
+.course
+.settings/
+
+# Intellij course files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Gradle
+.gradletasknamecache
+.gradle/
+
+build/
+bin/
+out/
+
+/.project

@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  database:
+    image: linuxserver/mariadb
+    container_name: level-uphaken-database
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:3306:3306
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=lvlup
+      - MYSQL_USER=lvlup
+      - MYSQL_PASSWORD=lvlup
+      - TZ=Europe/Berlin
+    volumes:
+      - data-mariadb:/config/
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: .docker/development.Dockerfile
+    container_name: level-uphaken-backend
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+      - ./backend/:/app/
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: .docker/development.Dockerfile
+    container_name: level-uphaken-frontend
+    ports:
+      - 127.0.0.1:3000:3000
+    volumes:
+      - ./frontend/:/app/
+
+volumes:
+  data-mariadb:
+    name: level-uphaken-data-mariadb
+
+networks:
+  default:
+    name: level-uphaken-network

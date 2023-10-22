@@ -1,0 +1,38 @@
+logging:
+  level:
+    org.springframework: warn
+    org.hibernate.type: warn
+---
+spring:
+  jpa:
+    open-in-view: true
+    database: H2
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: false
+        use_sql_comments: true
+        format_sql: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  devtools:
+    restart:
+      poll-interval: 1500
+      quiet-period: 1499
+---
+server:
+  error:
+    include-stacktrace: on_trace_param
+---
+application:
+  jwtSecret: "development-dummy-thick-and-long-jwt-secret-so-tests-wont-fail-and-break-my-heart"
